@@ -45,11 +45,11 @@ INSTALLED_APPS = [
     'DjangoUeditor',
 
     'index',
-    # 'uprofile',
-    'userinfo',
+    'uprofile',
 ]
 
-AUTH_USER_MODEL='userinfo.UProfile'
+AUTH_USER_MODEL='uprofile.Uprofile'
+
 
 # AUTHENTICATION_BACKENDS = (
 #     'django.contrib.auth.backends.ModelBackend',# 标准username验证登录
