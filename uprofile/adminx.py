@@ -1,0 +1,19 @@
+# import xadmin
+# from django.contrib import admin
+# from django.contrib.auth.models import User
+# from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+# from .models import *
+#
+# # Register your models here.
+# class UprofileInline(admin.StackedInline):
+#     model = Uprofile
+#     can_delete = False
+#     fk_name = 'user'
+#     max_num = 1
+#
+# class UserAdmin(BaseUserAdmin):
+#     inlines = [UprofileInline, ]
+#
+# xadmin.site.unregister(User)
+# xadmin.site.register(User, UserAdmin)
+# xadmin.site.register(Uprofile)
