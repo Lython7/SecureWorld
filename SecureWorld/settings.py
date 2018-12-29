@@ -28,9 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,13 +88,15 @@ WSGI_APPLICATION = 'SecureWorld.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+MySQLconfig = eval((os.getenv('mysql_config', None)))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'USER': MySQLconfig['USER'],
+        'PASSWORD': MySQLconfig['PASSWD'],
+        'HOST': MySQLconfig['HOST'],
+        'PORT': MySQLconfig['PORT'],
         'NAME': 'SecureWorld',
     },
 }
@@ -150,6 +149,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
 ]
 
 
@@ -159,3 +159,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static') # 部署时需要使用
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# USE_L10N = False
+
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+
+DATE_FORMAT = 'Y-m-d'

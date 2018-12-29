@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8">
+        <link REL="SHORTCUT ICON" HREF="{% static "index/img/favicon.ico" %}"/>
+        <link href={% static "base.css" %} rel="stylesheet" type="text/css" />
+        <title>
+            {{ PageTitle }}
+        </title>
+    </head>
+
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+
+</html>

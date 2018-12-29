@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link REL="SHORTCUT ICON" HREF="{% static "index/img/favicon.ico" %}"/>
+    <title>{{ PageTitle }}</title>
+    <style type="text/css">
+        *{margin: 0;padding:0;}
+        .news-image{
+            width: 100px;
+            height: 100px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+{#            border: 1px solid black;#}
+        }
+        img{
+            margin: 0 -100%;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<h1>新闻中心</h1>
+{% include 'nav.html' %}
+
+{##}
+{#{% for news in newsList_L2 %}#}
+{#    <h1>{{ news.title }}</h1>#}
+{#    <div class="news-image">#}
+{#        <img src="/media/{{ news.image }}" />#}
+{#    </div>#}
+    {#    {{ news.content | safe }}#}
+{#{% endfor %}#}
+{##}
+{% for news in page %}
+    <h1><a href={% url "newsShow" news.id %}>{{ news.title }}</a></h1>
+    <div class="news-image">
+        <img src="/media/{{ news.image }}" />
+    </div>
+{#    {{ news.content | safe }}#}
+{% endfor %}
+
+
+
+{#<div class="row">#}
+{#    <button class="btn btn-info">#}
+{#        目前是第{{ polls.number }}页#}
+{#    </button>#}
+{##}
+{#    {% if polls.has_previous %}#}
+{#        <button class="btn btn-info">#}
+{#            <a href="？p={{ polls.previous_page_number }}">上一页</a>#}
+{#        </button>#}
+{#    {% endif %}#}
+{##}
+{#    {% if polls.has_next %}#}
+{#        <button class="btn btn-info">#}
+{#            <a href="？p={{ polls.next_page_number }}>下一页</a>#}
+{#        </button>#}
+{#    {% endif %}#}
+{#    #}
+{#</div>#}
+
+{% for index in page.paginator.page_range %}
+    <a  href="/news/newsCenter/{{ index }}">{{ index }}</a>
+{% endfor %}
+
+</body>
+</html>

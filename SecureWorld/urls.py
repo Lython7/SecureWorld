@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.urls import path, include
+from django.views.static import serve
 
 import xadmin
+from SecureWorld.settings import MEDIA_ROOT
+
 xadmin.autodiscover()
 
 # version模块自动注册需要版本控制的 Model
@@ -29,6 +32,8 @@ urlpatterns = [
 
     path('admin/', xadmin.site.urls),
     path('ueditor/', include('DjangoUeditor.urls')),
+
+    url(r'^media/(?P<path>.*)$',  serve, {"document_root": MEDIA_ROOT}),
 
 
 ]

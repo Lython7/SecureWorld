@@ -7,12 +7,12 @@ from django.contrib.auth.models import User
 class Uprofile(AbstractUser):
     id = models.AutoField(primary_key=True)
     nick_name = models.CharField(max_length=32, null=True, blank=True, verbose_name='用户昵称', default='丑八怪')
-    birthday = models.DateTimeField(verbose_name='出生日期', default='1900-01-01')
+    birthday = models.DateTimeField(verbose_name='出生日期', null=True, blank=True)
     ucellphone = models.CharField(max_length=11, null=True, verbose_name='手机号码', unique=True)
     uposition = models.CharField(max_length=30, default='', verbose_name='工作岗位')
 
     class Meta:
-        verbose_name = '用户信息表'
+        verbose_name = '用户信息'
         verbose_name_plural = verbose_name
 
     def __str__(self):
