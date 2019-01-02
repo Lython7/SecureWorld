@@ -315,18 +315,35 @@ def catcher_remote_image(request):
     return HttpResponse(json.dumps(return_info, ensure_ascii=False), content_type="application/javascript")
 
 
+# def get_output_path(request, path_format, path_format_var):
+#     # 取得输出文件的路径
+#     OutputPathFormat = (request.GET.get(path_format, USettings.UEditorSettings[
+#                         "defaultPathFormat"]) % path_format_var).replace("\\", "/")
+#     # 分解OutputPathFormat
+#     OutputPath, OutputFile = os.path.split(OutputPathFormat)
+#     OutputPath = os.path.join(USettings.gSettings.MEDIA_ROOT, OutputPath)
+#     # 如果OutputFile为空说明传入的OutputPathFormat没有包含文件名，因此需要用默认的文件名
+#     if not OutputFile:
+#         OutputFile = USettings.UEditorSettings[
+#             "defaultPathFormat"] % path_format_var
+#         OutputPathFormat = os.path.join(OutputPathFormat, OutputFile)
+#     if not os.path.exists(OutputPath):
+#         os.makedirs(OutputPath)
+#     return (OutputPathFormat, OutputPath, OutputFile)
+
 def get_output_path(request, path_format, path_format_var):
     # 取得输出文件的路径
     OutputPathFormat = (request.GET.get(path_format, USettings.UEditorSettings[
-                        "defaultPathFormat"]) % path_format_var).replace("\\", "/")
+        "defaultPathFormat"]) % path_format_var).replace("\\", "/")
     # 分解OutputPathFormat
     OutputPath, OutputFile = os.path.split(OutputPathFormat)
-    OutputPath = os.path.join(USettings.gSettings.MEDIA_ROOT, OutputPath)
+    # OutputPath = os.path.join(USettings.gSettings.MEDIA_ROOT, OutputPath)
+    OutputPath = os.path.join(USettings.gSettings.MEDIA_ROOT, 'news', path_format_var['year'], path_format_var['month'], path_format_var['day'])
     # 如果OutputFile为空说明传入的OutputPathFormat没有包含文件名，因此需要用默认的文件名
     if not OutputFile:
         OutputFile = USettings.UEditorSettings[
             "defaultPathFormat"] % path_format_var
-        OutputPathFormat = os.path.join(OutputPathFormat, OutputFile)
+        OutputPathFormat = os.path.join('news', path_format_var['year'], path_format_var['month'], path_format_var['day'], OutputFile)
     if not os.path.exists(OutputPath):
         os.makedirs(OutputPath)
     return (OutputPathFormat, OutputPath, OutputFile)

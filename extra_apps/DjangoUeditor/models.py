@@ -17,6 +17,7 @@ class UEditorField(models.TextField):
                  toolbars="full", imagePath="", filePath="",
                  upload_settings={}, settings={}, command=None,
                  event_handler=None, **kwargs):
+
         self.ueditor_settings = locals().copy()
         kwargs["verbose_name"] = verbose_name
         del self.ueditor_settings["self"], self.ueditor_settings[

@@ -26,7 +26,7 @@ def delete_gap_dir(path):
             os.rmdir(path)
             # print('移除空目录: ' + path)
 
-def getNewsPath(instance, filename):
+def NewsTitlePicPath(instance, filename):
     timeList = datetime.now().strftime("%Y-%m-%d").split('-')
     return "{0}/{1}/{2}/{3}/{4}".format('news', timeList[0], timeList[1], timeList[2], filename)
 
@@ -37,19 +37,14 @@ class NewsCenter(models.Model):
         delete_gap_dir(os.path.join(MEDIA_ROOT, 'news'))
         makePath()
 
-    choices = (
-        (False, '保存'),
-        (True, '删除'),
-    )
-    level_choices = (
-        (2,'重磅新闻'),
-        (1,'列表新闻'),
-    )
+    choices = ((False, '保存'), (True, '删除'),)
+    level_choices = ((2,'重磅新闻'), (1,'列表新闻'),)
+
     title = models.CharField(max_length=50, verbose_name='新闻标题', null=False)
-    image = models.ImageField(verbose_name='新闻图片-展示', null=False, upload_to=getNewsPath)
+    image = models.ImageField(verbose_name='新闻图片-展示', null=False, upload_to=NewsTitlePicPath)
     news_time = models.DateTimeField(verbose_name='新闻时间', null=False, default=datetime.now)
     level = models.SmallIntegerField(verbose_name='新闻级别', null=False, default=1, choices=level_choices, db_index=True)
-    content = UEditorField(verbose_name='新闻内容',width=1000,height=600, toolbars="full", imagePath=getNewsPath, filePath=getNewsPath, upload_settings={"imageMaxSize":1204000},default='')
+    content = UEditorField(verbose_name='新闻内容',width=1000,height=600, toolbars="full", upload_settings={"imageMaxSize":1204000},default='')
     is_delete = models.BooleanField(choices=choices, default=False, null=False, verbose_name='逻辑删除', db_index=True)
 
     create_time = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='编辑时间', null=False)
